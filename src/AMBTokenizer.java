@@ -6,7 +6,6 @@ import java.util.Arrays;
 /**
  * This class will tokenize all the regular expressions
  */
-
 public class AMBTokenizer {
 
     public static ArrayList<AMBTokens> tokenize(String file){
@@ -22,13 +21,13 @@ public class AMBTokenizer {
         Called in the Main
          */
         String rawData = "( 4 * 2 )";
-        String[] stringTok = rawData.trim().split("\\s");
-        System.out.println(Arrays.toString(stringTok));
 
         /* This will be the loop that will tokenize the RE's and
          * add them to ArrayList. First: KEYWORDS; Second: SYMBOLS;
          * then tokenize the integer, characterString, and label grammars
          */
+        String[] stringTok = rawData.trim().split("\\s");
+        //System.out.println(Arrays.toString(stringTok));
         for (String str : stringTok) {
             AMBTokens tok = null;
             // First to tokenize: KEYWORDS
@@ -87,8 +86,7 @@ public class AMBTokenizer {
             }
             tokens.add(tok);
 
-
-
+//            // First to tokenize: KEYWORDS
 //            if(str.equals("START_PROGRAM")) {
 //                tok = new START_PROGRAM();
 //            } else if (str.equals("END_PROGRAM")) {
