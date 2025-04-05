@@ -34,9 +34,41 @@ public class AMBTokenizer {
             // First to tokenize: KEYWORDS
             if(str.equals("START_PROGRAM")) {
                 tok = new START_PROGRAM();
-            } else if(){
+            } else if (str.equals("END_PROGRAM")) {
+                tok = new END_PROGRAM();
+            } else if (str.equals("START_SUB")) {
+                tok = new START_SUB();
+            } else if (str.equals("END_SUB")) {
+                tok = new END_SUB();
+            } else if (str.equals("GOSUB")) {
+                tok = new GOSUB();
+            } else if (str.equals("CODE")) {
+                tok = new CODE();
+            } else if (str.equals("IF")) {
+                tok = new IF();
+            } else if (str.equals("THEN")) {
+                tok = new THEN();
+            } else if (str.equals("ELSE")) {
+                tok = new ELSE();
+            } else if (str.equals("END_IF")) {
+                tok = new END_IF();
+            } else if (str.equals("WHILE")) {
+                tok = new WHILE();
+            } else if (str.equals("DO")) {
+                tok = new DO();
+            } else if (str.equals("END_WHILE")) {
+                tok = new END_WHILE();
+            } else if (str.equals("INT")) {
+                tok = new INT();
+            } else if (str.equals("STRING")) {
+                tok = new STRING();
+            } else if (str.equals("PRINT")) {
+                tok = new PRINT();
+            } else if (str.equals("INPUT")) {
+                tok = new INPUT();
 
-            } else if (str.equals("(")) { // Second: SYMBOLS
+                // Second: SYMBOLS
+            } else if (str.equals("(")) {
                 tok = new SoftOpen();
             } else if (str.equals("*")) {
                 tok = new MultOp(MultOp.Operand.mult);
