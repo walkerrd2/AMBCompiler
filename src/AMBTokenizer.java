@@ -36,11 +36,15 @@ public class AMBTokenizer {
                 tok = new START_PROGRAM();
             } else if(){
 
-            } else if (str.equals("(")) {
-                tok = new softOpen();
-            } else if () {
+            } else if (str.equals("(")) { // Second: SYMBOLS
+                tok = new SoftOpen();
+            } else if (str.equals("*")) {
+                tok = new MultOp(MultOp.Operand.mult);
+            } else if (str.equals("/")) {
+                tok = new MultOp(MultOp.Operand.divide);
+            }
 
-            } else {
+            else {
                 //begin DFA implementation of symbol collection
                 // go character by character in str (the current string token)
                 // determine if it's going to be a:
