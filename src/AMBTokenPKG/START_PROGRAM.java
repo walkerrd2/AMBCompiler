@@ -1,4 +1,5 @@
 package AMBTokenPKG;
 
-public class START_PROGRAM extends AMBTokens{
+public class START_PROGRAM extends KeyWords{
+
 }
