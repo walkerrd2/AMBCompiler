@@ -27,7 +27,7 @@ public class AMBTokenizer {
          * then tokenize the integer, characterString, and label grammars
          */
         String[] stringTok = rawData.trim().split("\\s");
-        //System.out.println(Arrays.toString(stringTok));
+        System.out.println(Arrays.toString(stringTok));
         for (String str : stringTok) {
             AMBTokens tok = null;
             // First to tokenize: KEYWORDS
@@ -49,7 +49,6 @@ public class AMBTokenizer {
                 case "STRING" -> tok = new STRING();
                 case "PRINT" -> tok = new PRINT();
                 case "INPUT" -> tok = new INPUT();
-
 
                 // Second: SYMBOLS
                 case "(" -> tok = new SoftOpen();
