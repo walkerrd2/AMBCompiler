@@ -1,4 +1,4 @@
 package AMBTokenPKG;
 
-public class SoftOpen extends Symbols{
+public class SoftOpen extends Symbols {
 }
