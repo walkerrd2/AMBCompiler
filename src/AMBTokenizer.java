@@ -70,13 +70,41 @@ public class AMBTokenizer {
                 // Second: SYMBOLS
             } else if (str.equals("(")) {
                 tok = new SoftOpen();
+            } else if (str.equals(")")) {
+                tok = new SoftClose();
+            } else if (str.equals("[")) {
+                tok = new HardOpen();
+            } else if (str.equals("]")) {
+                tok = new HardClose();
+            } else if (str.equals("\"")) {
+                tok = new Quote();
+            } else if (str.equals(";")) {
+                tok = new Semi();
+            } else if (str.equals(":=")) {
+                tok = new Assignment();
+            } else if (str.equals(":")) {
+                tok = new Colon();
             } else if (str.equals("*")) {
                 tok = new MultOp(MultOp.Operand.mult);
             } else if (str.equals("/")) {
                 tok = new MultOp(MultOp.Operand.divide);
-            }
-
-            else {
+            } else if (str.equals("+")) {
+                tok = new AddOp(AddOp.Operand.add);
+            } else if (str.equals("-")) {
+                tok = new AddOp(AddOp.Operand.subtract);
+            } else if (str.equals("<")) {
+                tok = new CompOp(CompOp.Operand.greaterThan);
+            } else if (str.equals(">")) {
+                tok = new CompOp(CompOp.Operand.lessThan);
+            } else if (str.equals("=<")) {
+                tok = new CompOp(CompOp.Operand.greaterThanEq);
+            } else if (str.equals("=>")) {
+                tok = new CompOp(CompOp.Operand.lessThanEq);
+            } else if (str.equals("=")) {
+                tok = new CompOp(CompOp.Operand.equal);
+            } else if (str.equals("!=")) {
+                tok = new CompOp(CompOp.Operand.notEqual);
+            } else {
                 //begin DFA implementation of symbol collection
                 // go character by character in str (the current string token)
                 // determine if it's going to be a:
@@ -91,11 +119,7 @@ public class AMBTokenizer {
                 System.exit(1);
             }
             tokens.add(tok);
-
-
-
         }
-
         return tokens;
     }
 
