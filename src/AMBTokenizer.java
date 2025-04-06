@@ -26,7 +26,7 @@ public class AMBTokenizer {
          * add them to ArrayList. First: KEYWORDS; Second: SYMBOLS;
          * then tokenize the integer, characterString, and label grammars
          */
-        String[] stringTok = rawData.trim().split("\\s");
+        String[] stringTok = rawData.split("\s|\n");
         System.out.println(Arrays.toString(stringTok));
         for (String str : stringTok) {
             AMBTokens tok = null;
@@ -85,93 +85,6 @@ public class AMBTokenizer {
             }
             tokens.add(tok);
 
-//            // First to tokenize: KEYWORDS
-//            if(str.equals("START_PROGRAM")) {
-//                tok = new START_PROGRAM();
-//            } else if (str.equals("END_PROGRAM")) {
-//                tok = new END_PROGRAM();
-//            } else if (str.equals("START_SUB")) {
-//                tok = new START_SUB();
-//            } else if (str.equals("END_SUB")) {
-//                tok = new END_SUB();
-//            } else if (str.equals("GOSUB")) {
-//                tok = new GOSUB();
-//            } else if (str.equals("CODE")) {
-//                tok = new CODE();
-//            } else if (str.equals("IF")) {
-//                tok = new IF();
-//            } else if (str.equals("THEN")) {
-//                tok = new THEN();
-//            } else if (str.equals("ELSE")) {
-//                tok = new ELSE();
-//            } else if (str.equals("END_IF")) {
-//                tok = new END_IF();
-//            } else if (str.equals("WHILE")) {
-//                tok = new WHILE();
-//            } else if (str.equals("DO")) {
-//                tok = new DO();
-//            } else if (str.equals("END_WHILE")) {
-//                tok = new END_WHILE();
-//            } else if (str.equals("INT")) {
-//                tok = new INT();
-//            } else if (str.equals("STRING")) {
-//                tok = new STRING();
-//            } else if (str.equals("PRINT")) {
-//                tok = new PRINT();
-//            } else if (str.equals("INPUT")) {
-//                tok = new INPUT();
-//
-//                // Second: SYMBOLS
-//            } else if (str.equals("(")) {
-//                tok = new SoftOpen();
-//            } else if (str.equals(")")) {
-//                tok = new SoftClose();
-//            } else if (str.equals("[")) {
-//                tok = new HardOpen();
-//            } else if (str.equals("]")) {
-//                tok = new HardClose();
-//            } else if (str.equals("\"")) {
-//                tok = new Quote();
-//            } else if (str.equals(";")) {
-//                tok = new Semi();
-//            } else if (str.equals(":=")) {
-//                tok = new Assignment();
-//            } else if (str.equals(":")) {
-//                tok = new Colon();
-//            } else if (str.equals("*")) {
-//                tok = new MultOp(MultOp.Operand.mult);
-//            } else if (str.equals("/")) {
-//                tok = new MultOp(MultOp.Operand.divide);
-//            } else if (str.equals("+")) {
-//                tok = new AddOp(AddOp.Operand.add);
-//            } else if (str.equals("-")) {
-//                tok = new AddOp(AddOp.Operand.subtract);
-//            } else if (str.equals("<")) {
-//                tok = new CompOp(CompOp.Operand.greaterThan);
-//            } else if (str.equals(">")) {
-//                tok = new CompOp(CompOp.Operand.lessThan);
-//            } else if (str.equals("=<")) {
-//                tok = new CompOp(CompOp.Operand.greaterThanEq);
-//            } else if (str.equals("=>")) {
-//                tok = new CompOp(CompOp.Operand.lessThanEq);
-//            } else if (str.equals("=")) {
-//                tok = new CompOp(CompOp.Operand.equal);
-//            } else if (str.equals("!=")) {
-//                tok = new CompOp(CompOp.Operand.notEqual);
-//            } else {
-//                //begin DFA implementation of symbol collection
-//                // go character by character in str (the current string token)
-//                // determine if it's going to be a:
-//                // number
-//                // characterString
-//                // label
-//                // or failure ex. 32ab, 3*2 (if proper spacing isn't used)
-//            }
-//            if(tok == null){
-//                System.err.println("Tokenizing error. Bad token "+str);
-//                System.exit(1);
-//            }
-//            tokens.add(tok);
         }
         return tokens;
     }
