@@ -17,14 +17,16 @@ public class AMBTokenizer {
         //( 4 * 2 ) need spaces to make valid, will make life easier
 
         /*
-        Test to put rawData in array and print to remove white space.
-        Called in the Main
+        This is the String that we want to tokenize
          */
         String rawData = "( 4 * 2 )";
 
-        /* This will be the loop that will tokenize the RE's and
+        /* This will tokenize the RE's and
          * add them to ArrayList. First: KEYWORDS; Second: SYMBOLS;
-         * then tokenize the integer, characterString, and label grammars
+         * then tokenize the integer, characterString, and label grammars.
+         * rawData will be read through the switch cases. It will be stored
+         * as an Array String in stringTok (will use .split() to handle the
+         * whitespace.
          */
         String[] stringTok = rawData.split("\s|\n");
         System.out.println(Arrays.toString(stringTok));
