@@ -1,4 +1,6 @@
 import AMBTokenPKG.*;
+import AMBTokenPKG.KeywordsPKG.*;
+import AMBTokenPKG.SymbolsPKG.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,9 +37,9 @@ public class AMBTokenizer {
             // First to tokenize: KEYWORDS
             switch (str) {
                 case "START_PROGRAM" -> tok = new START_PROGRAM();
-                case "END_PROGRAM" -> tok = new END_PROGRAM();
+                case "END_PROGRAM." -> tok = new END_PROGRAM();
                 case "START_SUB" -> tok = new START_SUB();
-                case "END_SUB" -> tok = new END_SUB();
+                case "END_SUB." -> tok = new END_SUB();
                 case "GOSUB" -> tok = new GOSUB();
                 case "CODE" -> tok = new CODE();
                 case "IF" -> tok = new IF();
@@ -50,14 +52,14 @@ public class AMBTokenizer {
                 case "INT" -> tok = new INT();
                 case "STRING" -> tok = new STRING();
                 case "PRINT" -> tok = new PRINT();
-                case "INPUT" -> tok = new INPUT();
+                case "INPUT_INT" -> tok = new INPUT_INT();
+                case "INPUT_STRING" -> tok = new INPUT_STRING();
 
                 // Second: SYMBOLS
                 case "(" -> tok = new SoftOpen();
                 case ")" -> tok = new SoftClose();
                 case "[" -> tok = new HardOpen();
                 case "]" -> tok = new HardClose();
-                case "\"" -> tok = new Quote();
                 case ";" -> tok = new Semi();
                 case ":=" -> tok = new Assignment();
                 case ":" -> tok = new Colon();
