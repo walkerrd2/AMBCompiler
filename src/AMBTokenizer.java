@@ -108,11 +108,8 @@ public class AMBTokenizer {
             }
         } catch (IOException e){
             System.err.println("Error reading file: "+e.getMessage());
-            e.printStackTrace();
             System.exit(1);
         }
         return tokens;
     }
-
-
 }
