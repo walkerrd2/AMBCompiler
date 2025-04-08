@@ -27,9 +27,9 @@ public class AMBTokenizer {
             // read the test.amb file
             StringBuilder rawData = new StringBuilder();
             BufferedReader br = new BufferedReader(new FileReader(file));
-            String line;
 
             // turn that file to large string
+            String line;
             while ((line = br.readLine()) != null) {
                 rawData.append(line).append("\n");
             }
