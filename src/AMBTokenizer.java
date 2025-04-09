@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  * This class will tokenize all the regular expressions. First
@@ -39,8 +41,17 @@ public class AMBTokenizer {
             // the array of strings. The following will also clear out any
             // extra whitespace and not space anything enclosed in quotes
             // the array of strings
-            String[] stringTok = rawData.toString().trim().split("\\s|\\n");
-            System.out.println(Arrays.toString(stringTok));
+            List<String> stringTok = new ArrayList<>();
+            String re = "\"[^\"]*\"|:|:=|=>|=<|!=|[;+\\-*/()<>\\[\\]=]|[a-zA-Z0-9_\\.]+"; // This will handle everything inside quotes as a single string
+            Pattern pat = Pattern.compile(re);
+            Matcher match = pat.matcher(rawData.toString());
+
+            while(match.find()) {
+                String token = match.group().trim();
+                if (!token.isEmpty()) {
+                    stringTok.add(token);
+                }
+            }
 
             /* This will tokenize the RE's and
              * add them to ArrayList. First: KEYWORDS; Second: SYMBOLS;
@@ -109,6 +120,7 @@ public class AMBTokenizer {
                 }
                 tokens.add(tok);
             }
+            System.out.println(stringTok); // print off the giant array of the Strings
         } catch (IOException e){
             System.err.println("Error reading file: "+e.getMessage());
             System.exit(1);
