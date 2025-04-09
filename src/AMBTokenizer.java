@@ -35,6 +35,8 @@ public class AMBTokenizer {
             }
             br.close();
 
+            // the array of strings. The following will also clear out any
+            // extra whitespace and not space anything enclosed in quotes
             // the array of strings
             String[] stringTok = rawData.toString().split("\\s|\\n");
             System.out.println(Arrays.toString(stringTok));
@@ -99,9 +101,9 @@ public class AMBTokenizer {
                             System.err.println("Invalid token: " + str);
                         }
                     }
-                };
+                }
                 if(tok == null){
-                    System.err.println("Tokenizing error. Bad token "+str);
+                    System.err.println("Tokenizing error. Bad token at: "+str);
                     System.exit(1);
                 }
                 tokens.add(tok);
