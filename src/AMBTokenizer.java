@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * This class will tokenize all the regular expressions. First
@@ -38,7 +39,7 @@ public class AMBTokenizer {
             // the array of strings. The following will also clear out any
             // extra whitespace and not space anything enclosed in quotes
             // the array of strings
-            String[] stringTok = rawData.toString().split("\\s|\\n");
+            String[] stringTok = rawData.toString().trim().split("\\s|\\n");
             System.out.println(Arrays.toString(stringTok));
 
             /* This will tokenize the RE's and
