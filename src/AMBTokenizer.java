@@ -115,9 +115,7 @@ public class AMBTokenizer {
                     System.exit(1);
                 }
                 tokens.add(tok);
-                System.out.println(tokens.contains(tok)); // Prints out to make sure all tokens were added to ArrayList<AMBTokens>
             }
-            System.out.println(stringTok); // print off the giant array of the Strings
         } catch (IOException e){
             System.err.println("Error reading file: "+e.getMessage());
             System.exit(1);

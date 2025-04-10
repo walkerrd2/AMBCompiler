@@ -1,6 +1,7 @@
 package AMBTokenPKG;
+import AMBParseTreeNodes.AMBNodes;
 
-public class AMBTokens {
+public class AMBTokens extends AMBNodes {
 
 
 }
