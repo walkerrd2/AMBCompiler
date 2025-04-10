@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -42,7 +41,7 @@ public class AMBTokenizer {
             // extra whitespace and not space anything enclosed in quotes
             // the array of strings
             List<String> stringTok = new ArrayList<>();
-            String re = "\"[^\"]*\"|:|:=|=>|=<|!=|[;+\\-*/()<>\\[\\]=]|[a-zA-Z0-9_\\.]+"; // This will handle everything inside quotes as a single string
+            String re = "\"[^\"]*\"|:=|=>|=<|!=|-[1-9][0-9]*|:|[;+()<>\\[\\]=]|[*/]|[+\\-]|[a-zA-Z0-9_.]+"; // This will handle everything inside quotes as a single string
             Pattern pat = Pattern.compile(re);
             Matcher match = pat.matcher(rawData.toString());
 
@@ -54,11 +53,8 @@ public class AMBTokenizer {
             }
 
             /* This will tokenize the RE's and
-             * add them to ArrayList. First: KEYWORDS; Second: SYMBOLS;
+             * add them to ArrayList<AMBTokens>. First: KEYWORDS; Second: SYMBOLS;
              * then tokenize the integer, characterString, and label grammars.
-             * rawData will be read through the switch cases. It will be stored
-             * as an Array String in stringTok (will use .split() to handle the
-             * whitespace.
              */
             for (String str : stringTok) {
                 AMBTokens tok = null;
@@ -119,6 +115,7 @@ public class AMBTokenizer {
                     System.exit(1);
                 }
                 tokens.add(tok);
+                System.out.println(tokens.contains(tok));
             }
             System.out.println(stringTok); // print off the giant array of the Strings
         } catch (IOException e){
