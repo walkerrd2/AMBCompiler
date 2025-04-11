@@ -1,6 +1,4 @@
-import AMBParseTreeNodes.AMBNodes;
-import AMBParseTreeNodes.Program;
-import AMBParseTreeNodes.VariableList;
+import AMBParseTreeNodes.*;
 import AMBTokenPKG.AMBTokens;
 import AMBTokenPKG.KeywordsPKG.*;
 import AMBTokenPKG.SymbolCollectionPKG.Labels;
@@ -58,7 +56,7 @@ public class AMBParseTree {
 
     public static AMBNodes variable(){
         AMBTokens cur = code.get(currentTok);
-        AMBNodes node = new VariableList();
+        AMBNodes node = new Variable();
         Class<?> curClass = cur.getClass();
         if (curClass == INT.class){
             consume(node, INT.class);
@@ -80,7 +78,7 @@ public class AMBParseTree {
 
     public static AMBNodes arrayVariable(){
         AMBTokens cur = code.get(currentTok);
-        AMBNodes node = new VariableList();
+        AMBNodes node = new ArrayVariable();
         Class<?> curClass = cur.getClass();
         if (curClass == INT.class) {
             consume(node, INT.class);
@@ -107,7 +105,7 @@ public class AMBParseTree {
 
     public static AMBNodes sublist(){
         AMBTokens cur = code.get(currentTok);
-        AMBNodes node = new VariableList();
+        AMBNodes node = new SubList();
         Class<?> curClass = cur.getClass();
         if (curClass == START_SUB.class){
             consume(node, START_SUB.class);
@@ -126,7 +124,7 @@ public class AMBParseTree {
 
     public static AMBNodes codeList(){
         AMBTokens cur = code.get(currentTok);
-        AMBNodes node = new VariableList();
+        AMBNodes node = new CodeList();
         Class<?> curClass = cur.getClass();
 
 
