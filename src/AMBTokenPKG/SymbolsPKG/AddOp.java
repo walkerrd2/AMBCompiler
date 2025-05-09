@@ -13,14 +13,4 @@ public class AddOp extends Symbols {
         return op;
     }
 
-    public String toString(){
-        return switch(op){
-            case add -> "+";
-            case subtract -> "-";
-            default -> null;
-        };
-    }
-
-
-
 }

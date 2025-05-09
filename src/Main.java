@@ -19,7 +19,7 @@ public class Main {
             System.out.println(pyCode);
 
             try(PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(Paths.get("output.py").toFile())))){
-                System.out.println(pyCode);
+                pw.println(pyCode);
                 System.out.println("Successfully wrote Python code to output.py");
             } catch (IOException e){
                 System.err.println("Error writing to file: " + e.getMessage());

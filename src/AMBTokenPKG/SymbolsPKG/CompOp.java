@@ -13,18 +13,4 @@ public class CompOp extends Symbols {
         return op;
     }
 
-    // make toString()
-    public String toString(){
-        return switch(op){
-            case greaterThan -> ">";
-            case lessThan -> "<";
-            case greaterThanEq -> ">=";
-            case lessThanEq -> "<=";
-            case equal -> "=";
-            case notEqual -> "!=";
-            default -> null;
-        };
-    }
-
-
 }

@@ -13,13 +13,4 @@ public class MultOp extends Symbols {
         return op;
     }
 
-    public String toString(){
-        return switch(op){
-            case mult -> "*";
-            case divide -> "/";
-            default -> null;
-        };
-    }
-
-
 }

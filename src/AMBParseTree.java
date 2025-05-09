@@ -294,10 +294,8 @@ public class AMBParseTree {
             node.addChild(expression());
         } else if (curClass == INPUT_INT.class){
             consume(node, INPUT_INT.class);
-            consume(node, Semi.class);
         } else if (curClass == INPUT_STRING.class){
             consume(node, INPUT_STRING.class);
-            consume(node, Semi.class);
         } else {
             System.err.println("On token number "+currentTok+" Invalid token "+cur);
             throw new ExpectedSymbol();

@@ -5,12 +5,11 @@ import AMBTokenPKG.SymbolCollectionPKG.CharacterString;
 import AMBTokenPKG.SymbolCollectionPKG.Labels;
 import AMBTokenPKG.SymbolCollectionPKG.Numbers;
 import AMBTokenPKG.SymbolsPKG.*;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class GeneratePython {
+
     private AMBNodes root;
     private StringBuilder pythonCode;
     private int indentLevel;
@@ -18,9 +17,6 @@ public class GeneratePython {
     private Map<String, Integer> arrayDimensions;
     private Map<String, String> subroutines;
 
-    /**
-     * Constructor for the GeneratePython class.
-     */
     public GeneratePython(AMBNodes root) {
         this.root = root;
         this.pythonCode = new StringBuilder();
@@ -28,26 +24,33 @@ public class GeneratePython {
         this.variableTypes = new HashMap<>();
         this.arrayDimensions = new HashMap<>();
         this.subroutines = new HashMap<>();
-
-        // Add default variables that might be referenced but not declared in the AMB code
-        // This prevents errors like the "res" token error you encountered
-        variableTypes.put("res", "int");
-        variableTypes.put("total", "int");
-        variableTypes.put("count", "int");
-        variableTypes.put("x", "int");
-        variableTypes.put("str", "str");
-
-        // Initialize these default variables in the Python code
-        pythonCode.append("# Default variables\n");
-        pythonCode.append("res = 0\n");
-        pythonCode.append("total = 0\n");
-        pythonCode.append("count = 0\n");
-        pythonCode.append("x = 0\n");
-        pythonCode.append("str = \"\"\n");
     }
 
-    /**
-     * Generates Python code from the parse tree.
+    /*
+     * Helper function to turn the operators
+     * into symbols so they dont print as words
+     */
+    private String mapOperator(String ambOp) {
+        switch (ambOp) {
+            case "add": return "+";
+            case "sub": return "-";
+            case "mult": return "*";
+            case "div": return "/";
+            case "mod": return "%";
+            case "greaterThan": return ">";
+            case "lessThan": return "<";
+            case "equalTo": return "==";
+            case "notEqualTo": return "!=";
+            case "greaterEqual": return ">=";
+            case "lessEqual": return "<=";
+            case "and": return "and";
+            case "or": return "or";
+            default: return ambOp;
+        }
+    }
+
+    /*
+     * Generate Python code from the parse tree.
      */
     public String generateCode() {
         if (root instanceof Program) {
@@ -56,7 +59,7 @@ public class GeneratePython {
         return pythonCode.toString();
     }
 
-    /**
+    /*
      * Processes the Program node and its children.
      */
     private void processProgram(Program program) {
@@ -84,7 +87,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes a VariableList node and its children.
      */
     private void processVariableList(VariableList variableList) {
@@ -95,14 +98,13 @@ public class GeneratePython {
                 processSubList((SubList) variableList.getChildren().get(i));
             } else if (variableList.getChildren().get(i) instanceof AMBTokens) {
                 // Skip AMB tokens like "CODE"
-                continue;
             } else if (variableList.getChildren().get(i) instanceof VariableList) {
                 processVariableList((VariableList) variableList.getChildren().get(i));
             }
         }
     }
 
-    /**
+    /*
      * Processes a Variable node and its children.
      */
     private void processVariable(Variable variable) {
@@ -130,7 +132,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes an ArrayVariable node and its children.
      */
     private void processArrayVariable(ArrayVariable arrayVariable) {
@@ -172,7 +174,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes a SubList node and its children.
      */
     private void processSubList(SubList subList) {
@@ -192,7 +194,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes a CodeList node and its children.
      */
     private void processCodeList(CodeList codeList) {
@@ -205,7 +207,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes a CodeLine node and its children.
      */
     private void processCodeLine(CodeLine codeLine) {
@@ -242,7 +244,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes a LineLabel node and its children.
      */
     private void processLineLabel(LineLabel lineLabel) {
@@ -257,7 +259,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes an AssignmentVar node and its children.
      */
     private void processAssignment(AssignmentVar assignment, String varName) {
@@ -292,7 +294,7 @@ public class GeneratePython {
         pythonCode.append("\n");
     }
 
-    /**
+    /*
      * Processes an ExpressionOrInput node and its children.
      */
     private void processExpressionOrInput(ExpressionOrInput expressionOrInput) {
@@ -307,7 +309,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes an Expression node and its children.
      */
     private void processExpression(Expression expression) {
@@ -320,7 +322,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes a Term node and its children.
      */
     private void processTerm(Term term) {
@@ -333,7 +335,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes a TermTail node and its children.
      */
     private void processTermTail(TermTail termTail) {
@@ -348,7 +350,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes a Factor node and its children.
      */
     private void processFactor(Factor factor) {
@@ -360,7 +362,7 @@ public class GeneratePython {
             } else if (factor.getChildren().get(i) instanceof Numbers) {
                 pythonCode.append(((Numbers) factor.getChildren().get(i)).getVal());
             } else if (factor.getChildren().get(i) instanceof CharacterString) {
-                pythonCode.append(((CharacterString) factor.getChildren().get(i)).getVal());
+                pythonCode.append("\"").append(((CharacterString) factor.getChildren().get(i)).getVal()).append("\"");
             } else if (factor.getChildren().get(i) instanceof Labels) {
                 String varName = ((Labels) factor.getChildren().get(i)).getLab();
                 pythonCode.append(varName);
@@ -372,7 +374,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes a FactorTail node and its children.
      */
     private void processFactorTail(FactorTail factorTail) {
@@ -387,7 +389,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes a PossibleArray node and its children.
      */
     private void processPossibleArray(PossibleArray possibleArray) {
@@ -400,7 +402,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes an ArrayNumberOrLabel node and its children.
      */
     private void processArrayNumberOrLabel(ArrayNumberOrLabel arrayNumberOrLabel) {
@@ -415,7 +417,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes a Condition node and its children.
      */
     private void processCondition(Condition condition) {
@@ -439,7 +441,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes a ThenCodeList node and its children.
      */
     private void processThenCodeList(ThenCodeList thenCodeList) {
@@ -470,7 +472,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes an ElseCodeList node and its children.
      */
     private void processElseCodeList(ElseCodeList elseCodeList) {
@@ -483,7 +485,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes a Loop node and its children.
      */
     private void processLoop(Loop loop) {
@@ -507,7 +509,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Processes a WhileCodeList node and its children.
      */
     private void processWhileCodeList(WhileCodeList whileCodeList) {
@@ -520,7 +522,7 @@ public class GeneratePython {
         }
     }
 
-    /**
+    /*
      * Adds the appropriate number of indentation tabs to the Python code.
      */
     private void addIndent() {
