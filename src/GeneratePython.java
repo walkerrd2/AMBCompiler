@@ -27,29 +27,6 @@ public class GeneratePython {
     }
 
     /*
-     * Helper function to turn the operators
-     * into symbols so they dont print as words
-     */
-    private String mapOperator(String ambOp) {
-        switch (ambOp) {
-            case "add": return "+";
-            case "sub": return "-";
-            case "mult": return "*";
-            case "div": return "/";
-            case "mod": return "%";
-            case "greaterThan": return ">";
-            case "lessThan": return "<";
-            case "equalTo": return "==";
-            case "notEqualTo": return "!=";
-            case "greaterEqual": return ">=";
-            case "lessEqual": return "<=";
-            case "and": return "and";
-            case "or": return "or";
-            default: return ambOp;
-        }
-    }
-
-    /*
      * Generate Python code from the parse tree.
      */
     public String generateCode() {
@@ -341,7 +318,7 @@ public class GeneratePython {
     private void processTermTail(TermTail termTail) {
         for (int i = 0; i < termTail.getChildren().size(); i++) {
             if (termTail.getChildren().get(i) instanceof AddOp) {
-                pythonCode.append(" ").append(((AddOp) termTail.getChildren().get(i)).getOp()).append(" ");
+                pythonCode.append(" ").append(((AddOp) termTail.getChildren().get(i)).getOp().toString()).append(" ");
             } else if (termTail.getChildren().get(i) instanceof Term) {
                 processTerm((Term) termTail.getChildren().get(i));
             } else if (termTail.getChildren().get(i) instanceof TermTail) {
@@ -380,7 +357,7 @@ public class GeneratePython {
     private void processFactorTail(FactorTail factorTail) {
         for (int i = 0; i < factorTail.getChildren().size(); i++) {
             if (factorTail.getChildren().get(i) instanceof MultOp) {
-                pythonCode.append(" ").append(((MultOp) factorTail.getChildren().get(i)).getOp()).append(" ");
+                pythonCode.append(" ").append(((MultOp) factorTail.getChildren().get(i)).getOp().toString()).append(" ");
             } else if (factorTail.getChildren().get(i) instanceof Factor) {
                 processFactor((Factor) factorTail.getChildren().get(i));
             } else if (factorTail.getChildren().get(i) instanceof FactorTail) {
@@ -429,7 +406,7 @@ public class GeneratePython {
             if (condition.getChildren().get(i) instanceof Expression && i == 0) {
                 processExpression((Expression) condition.getChildren().get(i));
             } else if (condition.getChildren().get(i) instanceof CompOp) {
-                pythonCode.append(" ").append(((CompOp) condition.getChildren().get(i)).getOp()).append(" ");
+                pythonCode.append(" ").append(((CompOp) condition.getChildren().get(i)).getOp().toString()).append(" ");
             } else if (condition.getChildren().get(i) instanceof Expression && i > 0) {
                 processExpression((Expression) condition.getChildren().get(i));
             } else if (condition.getChildren().get(i) instanceof ThenCodeList) {

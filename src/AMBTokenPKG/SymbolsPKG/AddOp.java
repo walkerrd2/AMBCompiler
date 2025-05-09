@@ -2,7 +2,17 @@ package AMBTokenPKG.SymbolsPKG;
 
 public class AddOp extends Symbols {
 
-    public enum Operand {add, subtract};
+    public enum Operand {add, subtract;
+
+        @Override
+        public String toString(){
+            return switch(this){
+                case add -> "+";
+                case subtract -> "-";
+                default -> null;
+            };
+        }
+    }
     private Operand op;
 
     public AddOp(Operand op) {
@@ -11,6 +21,11 @@ public class AddOp extends Symbols {
 
     public Operand getOp() {
         return op;
+    }
+
+    @Override
+    public String toString(){
+        return op.toString();
     }
 
 }
